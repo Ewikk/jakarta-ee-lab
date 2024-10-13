@@ -5,17 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fda45a91-de57-403a-978e-b0576f4fcf4e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/pg/jakartaeelab/commit/entity/Commit.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/pg/jakartaeelab/gitRepository/entity/GitRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/pg/jakartaeelab/user/entity/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/liberty/config/server.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/pg/jakartaeelab/commit/repository/CommitRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/pg/jakartaeelab/configuration/listener/CreateDataSource.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/pg/jakartaeelab/datastore/component/DataStore.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/pg/jakartaeelab/repository/api/Repository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/pg/jakartaeelab/serialization/component/CloningUtility.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/pg/jakartaeelab/user/repository/api/UserRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/pg/jakartaeelab/user/repository/memory/UserInMemoryRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pg/jakartaeelab/HelloServlet.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pg/jakartaeelab/commit/entity/Commit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pg/jakartaeelab/commit/entity/Commit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pg/jakartaeelab/gitRepository/entity/GitRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pg/jakartaeelab/gitRepository/entity/GitRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pg/jakartaeelab/user/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pg/jakartaeelab/user/entity/User.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,6 +52,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "lab1",
+    "last_opened_file_path": "D:/Studia/7/Narzedzia i Aplikacje Jakarta EE/lab/jakarta-ee-lab/src/main/java/com/pg/jakartaeelab/user/entity",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -59,6 +60,11 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Studia\7\Narzedzia i Aplikacje Jakarta EE\lab\jakarta-ee-lab\src\main\java\com\pg\jakartaeelab\user\entity" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
