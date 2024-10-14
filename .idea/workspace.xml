@@ -5,17 +5,36 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fda45a91-de57-403a-978e-b0576f4fcf4e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/pg/jakartaeelab/commit/repository/CommitRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/pg/jakartaeelab/configuration/listener/CreateDataSource.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/pg/jakartaeelab/datastore/component/DataStore.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/pg/jakartaeelab/repository/api/Repository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/pg/jakartaeelab/serialization/component/CloningUtility.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/pg/jakartaeelab/user/repository/api/UserRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/pg/jakartaeelab/user/repository/memory/UserInMemoryRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/requests.http" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/pg/jakartaeelab/commit/repository/memory/CommitInMemoryRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/pg/jakartaeelab/component/DtoFunctionFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/pg/jakartaeelab/configuration/listener/CreateControllers.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/pg/jakartaeelab/configuration/listener/CreateServices.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/pg/jakartaeelab/configuration/listener/InitializedData.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/pg/jakartaeelab/controller/servlet/ApiServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/pg/jakartaeelab/controller/servlet/exception/AlreadyExistsException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/pg/jakartaeelab/controller/servlet/exception/BadRequestException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/pg/jakartaeelab/controller/servlet/exception/HttpRequestException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/pg/jakartaeelab/controller/servlet/exception/NotFoundException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/pg/jakartaeelab/gitRepository/repository/api/GitRepositoryRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/pg/jakartaeelab/gitRepository/repository/memory/GitRepositoryMemoryRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/pg/jakartaeelab/user/controller/api/UserController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/pg/jakartaeelab/user/controller/simple/UserSimpleController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/pg/jakartaeelab/user/dto/GetUserResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/pg/jakartaeelab/user/dto/GetUsersResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/pg/jakartaeelab/user/dto/PutUserRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/pg/jakartaeelab/user/dto/function/RequestToUserFunction.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/pg/jakartaeelab/user/dto/function/UpdateUserWithRequestFunction.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/pg/jakartaeelab/user/dto/function/UserToResponseFunction.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/pg/jakartaeelab/user/dto/function/UsersToResponseFunction.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/pg/jakartaeelab/user/service/UserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pg/jakartaeelab/commit/entity/Commit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pg/jakartaeelab/commit/entity/Commit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pg/jakartaeelab/gitRepository/entity/GitRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pg/jakartaeelab/gitRepository/entity/GitRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pg/jakartaeelab/user/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pg/jakartaeelab/user/entity/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pg/jakartaeelab/HelloServlet.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pg/jakartaeelab/commit/repository/CommitRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pg/jakartaeelab/commit/repository/api/CommitRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pg/jakartaeelab/datastore/component/DataStore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pg/jakartaeelab/datastore/component/DataStore.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pg/jakartaeelab/user/repository/memory/UserInMemoryRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pg/jakartaeelab/user/repository/memory/UserInMemoryRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/ibm-web-ext.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/ibm-web-ext.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,7 +71,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "lab1",
-    "last_opened_file_path": "D:/Studia/7/Narzedzia i Aplikacje Jakarta EE/lab/jakarta-ee-lab/src/main/java/com/pg/jakartaeelab/user/entity",
+    "last_opened_file_path": "D:/Studia/7/Narzedzia i Aplikacje Jakarta EE/lab/jakarta-ee-lab/src/main/webapp/WEB-INF",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -62,8 +81,52 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Studia\7\Narzedzia i Aplikacje Jakarta EE\lab\jakarta-ee-lab\src\main\webapp\WEB-INF" />
       <recent name="D:\Studia\7\Narzedzia i Aplikacje Jakarta EE\lab\jakarta-ee-lab\src\main\java\com\pg\jakartaeelab\user\entity" />
     </key>
+  </component>
+  <component name="RunManager" selected="Liberty.Unnamed">
+    <configuration name="requests | #1" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/requests.http" requestIdentifier="#1" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="requests | #4" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/requests.http" index="4" requestIdentifier="#4" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="requests | #5" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/requests.http" index="5" requestIdentifier="#5" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="requests | #6" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/requests.http" index="6" requestIdentifier="#6" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="requests | #7" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/requests.http" index="7" requestIdentifier="#7" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="Unnamed" type="Liberty" factoryName="Liberty" nameIsGenerated="true">
+      <option name="buildFile" value="D:\Studia\7\Narzedzia i Aplikacje Jakarta EE\lab\jakarta-ee-lab\pom.xml" />
+      <module name="jakarta-ee-lab" />
+      <option name="params" />
+      <option name="RUN_IN_CONTAINER" value="false" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="HTTP Request.requests | #4" />
+      <item itemvalue="HTTP Request.requests | #5" />
+      <item itemvalue="HTTP Request.requests | #6" />
+      <item itemvalue="HTTP Request.requests | #7" />
+      <item itemvalue="HTTP Request.requests | #1" />
+      <item itemvalue="Liberty.Unnamed" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="HTTP Request.requests | #1" />
+        <item itemvalue="HTTP Request.requests | #7" />
+        <item itemvalue="HTTP Request.requests | #6" />
+        <item itemvalue="HTTP Request.requests | #4" />
+        <item itemvalue="HTTP Request.requests | #5" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -76,5 +139,56 @@
       <workItem from="1728829434880" duration="2000" />
     </task>
     <servers />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/pg/jakartaeelab/user/service/UserService.java</url>
+          <line>54</line>
+          <properties>
+            <option name="lambda-ordinal" value="0" />
+          </properties>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/pg/jakartaeelab/controller/servlet/ApiServlet.java</url>
+          <line>117</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/pg/jakartaeelab/user/service/UserService.java</url>
+          <line>35</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/pg/jakartaeelab/user/controller/simple/UserSimpleController.java</url>
+          <line>58</line>
+          <properties>
+            <option name="lambda-ordinal" value="-1" />
+          </properties>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/pg/jakartaeelab/controller/servlet/ApiServlet.java</url>
+          <line>107</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/pg/jakartaeelab/user/dto/function/UpdateUserWithRequestFunction.java</url>
+          <line>11</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/com/pg/jakartaeelab/user/controller/simple/UserSimpleController.java</url>
+          <line>43</line>
+          <properties class="com.pg.jakartaeelab.user.controller.simple.UserSimpleController" method="putUser">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

@@ -1,0 +1,69 @@
+GET http://localhost:9080/jakarta-ee-lab/api/users
+
+###
+
+GET http://localhost:9080/jakarta-ee-lab/api/users/c195b6a2-5966-4dd0-a790-5b160d34179f
+
+###
+
+GET http://localhost:9080/jakarta-ee-lab/api/users/f08ce4de-c57e-4f6e-a55f-7ce6a15e871d
+
+###
+
+GET http://localhost:9080/jakarta-ee-lab/api/users/96764b32-7085-49b2-aa46-7ad686e8efbe
+
+###
+
+GET http://localhost:9080/jakarta-ee-lab/api/users/a9525063-6a04-454b-9185-9a4c290a88b8
+
+###
+
+PUT http://localhost:9080/jakarta-ee-lab/api/users/8ada567b-c281-41d4-9542-ca38ac5951be
+Content-Type: application/json
+
+{
+  "login": "Piotrex",
+  "dateOfBirth": "2003-03-03"
+}
+
+###
+
+PATCH http://localhost:9080/jakarta-ee-lab/api/users/8ada567b-c281-41d4-9542-ca38ac5951be
+Content-Type: application/json
+
+{
+  "login": "Piotrex03",
+  "dateOfBirth": "2003-03-03"
+}
+
+###
+
+DELETE http://localhost:9080/jakarta-ee-lab/api/users/8ada567b-c281-41d4-9542-ca38ac5951be
+
+###
+
+GET http://localhost:9080/jakarta-ee-lab/api/users/c195b6a2-5966-4dd0-a790-5b160d34179f/avatar
+
+###
+
+GET http://localhost:9080/jakarta-ee-lab/api/users/f08ce4de-c57e-4f6e-a55f-7ce6a15e871d/avatar
+
+###
+
+GET http://localhost:9080/jakarta-ee-lab/api/users/96764b32-7085-49b2-aa46-7ad686e8efbe/avatar
+
+###
+
+PUT http://localhost:9080/jakarta-ee-lab/api/users/f08ce4de-c57e-4f6e-a55f-7ce6a15e871d/avatar
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="avatar"; filename="redix2.jpg'
+
+< src/main/resources/avatars/redix2.jpg
+--boundary--
+
+###
+
+DELETE http://localhost:9080/jakarta-ee-lab/api/users/f08ce4de-c57e-4f6e-a55f-7ce6a15e871d/avatar
+

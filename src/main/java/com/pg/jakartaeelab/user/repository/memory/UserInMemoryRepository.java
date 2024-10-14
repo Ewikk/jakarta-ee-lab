@@ -11,33 +11,38 @@ import java.util.UUID;
 public class UserInMemoryRepository implements UserRepository {
 
     private final DataStore dataStore;
+
+    public UserInMemoryRepository(DataStore store) {
+        this.dataStore = store;
+    }
+
     @Override
     public Optional<User> find(UUID id) {
-        return Optional.empty();
+        return dataStore.findAllUsers().stream().filter(user -> user.getId().equals(id)).findFirst();
     }
 
     @Override
     public List<User> findAll() {
-        return null;
+        return dataStore.findAllUsers();
     }
 
     @Override
     public void create(User entity) {
-
+        dataStore.createUser(entity);
     }
 
     @Override
     public void delete(User entity) {
-
+        dataStore.deleteUser(entity);
     }
 
     @Override
     public void update(User entity) {
-
+        dataStore.updateUser(entity);
     }
 
     @Override
     public Optional<User> findByLogin(String login) {
-        return Optional.empty();
+        return dataStore.findAllUsers().stream().filter(user -> user.getLogin().equals(login)).findFirst();
     }
 }
