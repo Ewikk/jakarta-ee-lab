@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <style>
+        body {
+            margin: 0px;
+            padding: 0px;
+            background-color: #ffffff;
+            color: #000;
+            font-family: Arial, Verdana, Helvetica, Tahoma, sans-serif;
+        }
+
+        #content {
+            font-size: 1em;
+            margin-left: 1em;
+            margin-right: 1em;
+            padding: 1em;
+        }
+
+        h4.basichead {
+            font-family: Arial, Verdana, Helvetica, Tahoma, sans-serif;
+        }
+
+        p {
+            padding-top: .5em;
+        }
+
+        ul {
+            line-height: 1.3em;
+        }
+
+        a:link {
+            color: #c00000
+        }
+
+        a:visited {
+            color: #c00000
+        }
+
+        #page {
+            border: 7px;
+            padding: 7px
+        }
+
+        #box {
+            margin: 0;
+        }
+
+        #title {
+            font-family: Arial, Verdana, Helvetica, Tahoma, sans-serif;
+            font-size: 24px;
+            font-weight: normal;
+            color: #274a71;
+            padding-bottom: 6px;
+        }
+
+        #error {
+            colory: #c00004;
+            margin-bottom: 10px;
+        }
+
+        #code {
+            font-family: monospace;
+            font-size: 8pt;
+        }
+
+        #stack {
+            margin-left: 30px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="content">
+    <div id="page">
+        <div id="box">
+
+            <div id="error"> Wyjątek zgłoszony przez klasę aplikacji java.util.Objects.requireNonNull:209
+            </div>
+            <div id="code">
+                java.lang.NullPointerException: <br>
+                <div id="stack">at java.base/java.util.Objects.requireNonNull(Objects.java:209)<br>at
+                    java.base/sun.nio.fs.WindowsFileSystem.getPath(WindowsFileSystem.java:216)<br>at
+                    java.base/java.nio.file.Path.of(Path.java:147)<br>at
+                    com.pg.jakartaeelab.user.service.UserService.lambda$createAvatar$1(UserService.java:67)<br>at
+                    java.base/java.util.Optional.ifPresent(Optional.java:178)<br>at
+                    com.pg.jakartaeelab.user.service.UserService.createAvatar(UserService.java:65)<br>at
+                    com.pg.jakartaeelab.user.controller.simple.UserSimpleController.lambda$putUserAvatar$5(UserSimpleController.java:101)<br>at
+                    java.base/java.util.Optional.ifPresentOrElse(Optional.java:196)<br>at
+                    com.pg.jakartaeelab.user.controller.simple.UserSimpleController.putUserAvatar(UserSimpleController.java:99)<br>at
+                    com.pg.jakartaeelab.controller.servlet.ApiServlet.doPut(ApiServlet.java:134)<br>at
+                    jakarta.servlet.http.HttpServlet.service(HttpServlet.java:550)<br>at
+                    com.pg.jakartaeelab.controller.servlet.ApiServlet.service(ApiServlet.java:51)<br>at
+                    jakarta.servlet.http.HttpServlet.service(HttpServlet.java:614)<br>at
+                    com.ibm.ws.webcontainer.servlet.ServletWrapper.service(ServletWrapper.java:1266)<br>at [internal
+                    classes]<br>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+

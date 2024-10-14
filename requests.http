@@ -58,6 +58,17 @@ PUT http://localhost:9080/jakarta-ee-lab/api/users/f08ce4de-c57e-4f6e-a55f-7ce6a
 Content-Type: multipart/form-data; boundary=boundary
 
 --boundary
+Content-Disposition: form-data; name="avatar"; filename="redix.jpg'
+
+< src/main/resources/avatars/redix.jpg
+--boundary--
+
+###
+
+PATCH http://localhost:9080/jakarta-ee-lab/api/users/f08ce4de-c57e-4f6e-a55f-7ce6a15e871d/avatar
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
 Content-Disposition: form-data; name="avatar"; filename="redix2.jpg'
 
 < src/main/resources/avatars/redix2.jpg

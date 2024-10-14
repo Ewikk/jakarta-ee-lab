@@ -15,10 +15,10 @@ public interface UserController {
     void putUser(UUID id, PutUserRequest request);
     void patchUser(UUID id, PatchUserRequest request);
     void deleteUser(UUID id);
-    byte[] getUserAvatar(UUID id);
+    byte[] getUserAvatar(UUID id, String path);
 
-    void putUserAvatar(UUID id, InputStream avatar);
-    void patchUserAvatar(UUID id, InputStream avatar);
+    void putUserAvatar(UUID id, InputStream avatar, String path);
+    void patchUserAvatar(UUID id, InputStream avatar, String path);
 
-    void deleteUserAvatar(UUID id);
+    void deleteUserAvatar(UUID id, String path);
 }

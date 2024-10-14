@@ -12,7 +12,11 @@ import com.pg.jakartaeelab.user.dto.PutUserRequest;
 import com.pg.jakartaeelab.user.entity.User;
 import com.pg.jakartaeelab.user.service.UserService;
 
+import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -41,11 +45,12 @@ public class UserSimpleController implements UserController {
     }
 
     @Override
-    public void putUser(UUID id, PutUserRequest request) {
+    public void putUser(UUID id, PutUserRequest request) throws AlreadyExistsException{
         Optional<User> user = service.find(id);
         if(user.isPresent()){
-            service.update(factory.requestToUser().apply(id, request));
-            return;
+            throw new AlreadyExistsException("User with id " + id + " already exists");
+//            service.update(factory.requestToUser().apply(id, request));
+//            return;
         }
         try {
             service.create(factory.requestToUser().apply(id, request));
@@ -72,38 +77,62 @@ public class UserSimpleController implements UserController {
     }
 
     @Override
-    public byte[] getUserAvatar(UUID id) {
-        return service.find(id)
-                .map(User::getAvatar)
-                .orElseThrow(NotFoundException::new);
+    public byte[] getUserAvatar(UUID id, String path) {
+        Path pathToAvatar = Paths.get(
+                path,
+                service.find(id)
+                        .map(user -> user.getId().toString())
+                        .orElseThrow(() -> new NotFoundException("User does not exist"))
+                        + ".jpg"
+        );
+        try {
+            if (!Files.exists(pathToAvatar)) {
+                throw new NotFoundException("User avatar does not exist");
+            }
+            return Files.readAllBytes(pathToAvatar);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
-    public void putUserAvatar(UUID id, InputStream avatar) {
+    public void putUserAvatar(UUID id, InputStream avatar, String path) {
         service.find(id).ifPresentOrElse(
-                user -> service.updateAvatar(id, avatar),
-                ()->{
+                user -> {
+                    service.createAvatar(id, avatar, path);
+                },
+                () -> {
                     throw new NotFoundException();
                 }
         );
     }
 
     @Override
-    public void patchUserAvatar(UUID id, InputStream avatar) {
+    public void patchUserAvatar(UUID id, InputStream avatar, String path) {
         service.find(id).ifPresentOrElse(
-                user -> service.updateAvatar(id, avatar),
-                ()->{
-                    throw new NotFoundException();
+                user -> service.updateAvatar(id, avatar, path),
+                () -> {
+                    throw new NotFoundException("User does not exist");
                 }
         );
     }
 
     @Override
-    public void deleteUserAvatar(UUID id) {
+    public void deleteUserAvatar(UUID id, String path) {
         service.find(id).ifPresentOrElse(
-                user -> service.deleteAvatar(id),
-                ()->{
-                    throw new NotFoundException();
+                user -> {
+                    try {
+                        Path avatarPath = Paths.get(path, user.getId().toString() + ".jpg");
+                        if (!Files.exists(avatarPath)) {
+                            throw new NotFoundException("User avatar does not exist");
+                        }
+                        Files.delete(avatarPath);
+                    } catch (IOException e) {
+                        throw new NotFoundException(e);
+                    }
+                },
+                () -> {
+                    throw new NotFoundException("User does not exist");
                 }
         );
     }

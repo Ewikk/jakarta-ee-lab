@@ -21,4 +21,13 @@
         <listener-class>com.pg.jakartaeelab.configuration.listener.InitializedData</listener-class>
     </listener>
 
+
+    <context-param>
+        <description>Location to store uploaded avatars</description>
+        <param-name>avatars-path</param-name>
+        <param-value>
+            C:\Users\JakubWojtalewicz\Studia\Jakarta EE\jakarta-ee-lab\src\main\resources\uploaded
+        </param-value>
+    </context-param>
+
 </web-app>

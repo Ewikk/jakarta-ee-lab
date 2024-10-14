@@ -1,10 +1,16 @@
 package com.pg.jakartaeelab.user.service;
 
+import com.pg.jakartaeelab.controller.servlet.exception.AlreadyExistsException;
+import com.pg.jakartaeelab.controller.servlet.exception.NotFoundException;
 import com.pg.jakartaeelab.user.entity.User;
 import com.pg.jakartaeelab.user.repository.api.UserRepository;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -40,11 +46,29 @@ public class UserService {
         repository.delete(user);
     }
 
-    public void updateAvatar(UUID id, InputStream is) {
+    public void updateAvatar(UUID id, InputStream is, String path) {
         repository.find(id).ifPresent(user -> {
             try {
-                user.setAvatar(is.readAllBytes());
-                repository.update(user);
+                Path existingPath = Path.of(path, id.toString() + ".jpg");
+                if (Files.exists(existingPath)) {
+                    Files.copy(is, existingPath, StandardCopyOption.REPLACE_EXISTING);
+                } else {
+                    throw new NotFoundException("User avatar not found, use PUT instead.");
+                }
+            } catch (IOException ex) {
+                throw new IllegalStateException(ex);
+            }
+        });
+    }
+
+    public void createAvatar(UUID id, InputStream is, String path) {
+        repository.find(id).ifPresent(user -> {
+            try {
+                Path destinationPath = Path.of(path, id.toString() + ".jpg");
+                if (Files.exists(destinationPath)) {
+                    throw new AlreadyExistsException("Avatar already exists, use PATCH instead.");
+                }
+                Files.copy(is, destinationPath);
             } catch (IOException ex) {
                 throw new IllegalStateException(ex);
             }

@@ -28,6 +28,8 @@ public class ApiServlet extends HttpServlet {
 
     private UserController userController;
 
+    private String avatarPath;
+
     public static final class Paths{
         public static final String API = "/api";
     }
@@ -50,10 +52,13 @@ public class ApiServlet extends HttpServlet {
         }
     }
 
+
+
     @Override
     public void init() throws ServletException {
         super.init();
         userController = (UserSimpleController) getServletContext().getAttribute("userController");
+        avatarPath = (String) getServletContext().getInitParameter("avatars-path");
         System.out.println("INIT");
     }
 
@@ -87,14 +92,14 @@ public class ApiServlet extends HttpServlet {
                 return;
 
             } else if (path.matches(Patterns.USER_AVATAR.pattern())) {
-                resp.setContentType("image/jpg");
                 UUID uuid = extractUuid(Patterns.USER_AVATAR, path);
+                resp.setContentType("image/png");
                 try {
-                    byte[] portrait = userController.getUserAvatar(uuid);
-                    resp.setContentLength(portrait.length);
-                    resp.getOutputStream().write(portrait);
-                } catch (NotFoundException e) {
-                    resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
+                    byte[] avatar = userController.getUserAvatar(uuid, avatarPath);
+                    resp.setContentLength(avatar.length);
+                    resp.getOutputStream().write(avatar);
+                } catch (NotFoundException ex) {
+                    resp.sendError(HttpServletResponse.SC_NOT_FOUND, ex.getMessage());
                 }
                 return;
 
@@ -119,18 +124,19 @@ public class ApiServlet extends HttpServlet {
                     resp.addHeader("Location", createUrl(req, Paths.API, "users", uuid.toString()));
                     resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
                 } catch(AlreadyExistsException e) {
-                    resp.setStatus(HttpServletResponse.SC_CONFLICT);
+                    resp.sendError(HttpServletResponse.SC_CONFLICT, e.getMessage());
                 }
                 return;
             } else if (path.matches(Patterns.USER_AVATAR.pattern())) {
+                resp.setContentType("image/png");
                 UUID uuid = extractUuid(Patterns.USER_AVATAR, path);
-                System.out.println("PUT USER AVATAR");
                 try {
-                    String fileName = req.getPart("avatar").getSubmittedFileName();
-                    userController.putUserAvatar(uuid, req.getPart("avatar").getInputStream());
-                    resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
-                } catch (AlreadyExistsException e) {
-                    resp.setStatus(HttpServletResponse.SC_CONFLICT);
+                    userController.putUserAvatar(uuid, req.getPart("avatar").getInputStream(), avatarPath);
+                    resp.setStatus(HttpServletResponse.SC_CREATED);
+                } catch (AlreadyExistsException ex) {
+                    resp.sendError(HttpServletResponse.SC_CONFLICT, ex.getMessage());
+                } catch (NotFoundException ex) {
+                    resp.sendError(HttpServletResponse.SC_NOT_FOUND, ex.getMessage());
                 }
                 return;
 
@@ -162,11 +168,10 @@ public class ApiServlet extends HttpServlet {
             if (path.matches(Patterns.USER_AVATAR.pattern())) {
                 UUID uuid = extractUuid(Patterns.USER_AVATAR, path);
                 try {
-                    userController.deleteUserAvatar(uuid);
+                    userController.deleteUserAvatar(uuid, avatarPath);
                     resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
-                } catch (NotFoundException e) {
-                    System.out.println("User avatar not found");
-                    resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
+                } catch (NotFoundException ex) {
+                    resp.sendError(HttpServletResponse.SC_NOT_FOUND, ex.getMessage());
                 }
                 return;
 
@@ -193,10 +198,14 @@ public class ApiServlet extends HttpServlet {
                 return;
             }
             if (path.matches(Patterns.USER_AVATAR.pattern())){
+                resp.setContentType("image/png");
                 UUID uuid = extractUuid(Patterns.USER_AVATAR, path);
-                String fileName = req.getPart("avatar").getSubmittedFileName();
-                userController.patchUserAvatar(uuid, req.getPart("avatar").getInputStream());
-                resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
+                try {
+                    userController.patchUserAvatar(uuid, req.getPart("avatar").getInputStream(), avatarPath);
+                    resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
+                } catch (NotFoundException ex) {
+                    resp.sendError(HttpServletResponse.SC_NOT_FOUND, ex.getMessage());
+                }
                 return;
 
             }else {
