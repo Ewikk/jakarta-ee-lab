@@ -42,7 +42,7 @@ DELETE http://localhost:9080/jakarta-ee-lab/api/users/8ada567b-c281-41d4-9542-ca
 
 ###
 
-GET http://localhost:9080/jakarta-ee-lab/api/users/c195b6a2-5966-4dd0-a790-5b160d34179f/avatar
+GET http://localhost:9080/jakarta-ee-lab/api/users/c195b6a2-5966-4dd0-a790-5b160d341778f/avatar
 
 ###
 

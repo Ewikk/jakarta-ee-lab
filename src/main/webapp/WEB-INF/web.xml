@@ -26,7 +26,7 @@
         <description>Location to store uploaded avatars</description>
         <param-name>avatars-path</param-name>
         <param-value>
-            C:\Users\JakubWojtalewicz\Studia\Jakarta EE\jakarta-ee-lab\src\main\resources\uploaded
+            /home/student/188636/jakarta-ee-lab/src/main/resources/uploaded
         </param-value>
     </context-param>
 

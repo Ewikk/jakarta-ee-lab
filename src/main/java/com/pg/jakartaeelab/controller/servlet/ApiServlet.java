@@ -30,7 +30,7 @@ public class ApiServlet extends HttpServlet {
 
     private String avatarPath;
 
-    public static final class Paths{
+    public static final class Paths {
         public static final String API = "/api";
     }
 
@@ -51,7 +51,6 @@ public class ApiServlet extends HttpServlet {
             super.service(request, response);
         }
     }
-
 
 
     @Override
@@ -123,7 +122,7 @@ public class ApiServlet extends HttpServlet {
                     userController.putUser(uuid, jsonb.fromJson(req.getReader(), PutUserRequest.class));
                     resp.addHeader("Location", createUrl(req, Paths.API, "users", uuid.toString()));
                     resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
-                } catch(AlreadyExistsException e) {
+                } catch (AlreadyExistsException e) {
                     resp.sendError(HttpServletResponse.SC_CONFLICT, e.getMessage());
                 }
                 return;
@@ -175,7 +174,7 @@ public class ApiServlet extends HttpServlet {
                 }
                 return;
 
-            }else {
+            } else {
                 resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             }
         }
@@ -192,12 +191,16 @@ public class ApiServlet extends HttpServlet {
             if (path.matches(Patterns.USER.pattern())) {
                 System.out.println("PATCH USER");
                 UUID uuid = extractUuid(Patterns.USER, path);
-                userController.patchUser(uuid, jsonb.fromJson(req.getReader(), PatchUserRequest.class));
+                try {
+                    userController.patchUser(uuid, jsonb.fromJson(req.getReader(), PatchUserRequest.class));
+                } catch (NotFoundException ex) {
+                    resp.sendError(HttpServletResponse.SC_NOT_FOUND, ex.getMessage());
+                }
                 resp.addHeader("Location", createUrl(req, Paths.API, "users", uuid.toString()));
                 resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
                 return;
             }
-            if (path.matches(Patterns.USER_AVATAR.pattern())){
+            if (path.matches(Patterns.USER_AVATAR.pattern())) {
                 resp.setContentType("image/png");
                 UUID uuid = extractUuid(Patterns.USER_AVATAR, path);
                 try {
@@ -208,7 +211,7 @@ public class ApiServlet extends HttpServlet {
                 }
                 return;
 
-            }else {
+            } else {
                 resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             }
         }
