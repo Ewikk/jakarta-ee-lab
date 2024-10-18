@@ -3,15 +3,19 @@ package com.pg.jakartaeelab.user.repository.memory;
 import com.pg.jakartaeelab.datastore.component.DataStore;
 import com.pg.jakartaeelab.user.entity.User;
 import com.pg.jakartaeelab.user.repository.api.UserRepository;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Inject;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+@RequestScoped
 public class UserInMemoryRepository implements UserRepository {
 
     private final DataStore dataStore;
 
+    @Inject
     public UserInMemoryRepository(DataStore store) {
         this.dataStore = store;
     }

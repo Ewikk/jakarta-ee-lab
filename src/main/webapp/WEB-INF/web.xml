@@ -5,28 +5,11 @@
          version="6.0"
          metadata-complete="false">
 
-    <listener>
-        <listener-class>com.pg.jakartaeelab.configuration.listener.CreateDataSource</listener-class>
-    </listener>
-
-    <listener>
-        <listener-class>com.pg.jakartaeelab.configuration.listener.CreateServices</listener-class>
-    </listener>
-
-    <listener>
-        <listener-class>com.pg.jakartaeelab.configuration.listener.CreateControllers</listener-class>
-    </listener>
-
-    <listener>
-        <listener-class>com.pg.jakartaeelab.configuration.listener.InitializedData</listener-class>
-    </listener>
-
-
     <context-param>
         <description>Location to store uploaded avatars</description>
         <param-name>avatars-path</param-name>
         <param-value>
-            /home/student/188636/jakarta-ee-lab/src/main/resources/uploaded
+            D:\Studia\7\Narzedzia i Aplikacje Jakarta EE\lab\jakarta-ee-lab\src\main\resources\uploaded
         </param-value>
     </context-param>
 

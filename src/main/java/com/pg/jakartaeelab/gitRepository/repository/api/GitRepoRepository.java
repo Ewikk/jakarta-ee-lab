@@ -5,5 +5,5 @@ import com.pg.jakartaeelab.repository.api.Repository;
 
 import java.util.UUID;
 
-public interface GitRepositoryRepository extends Repository<GitRepository, UUID> {
+public interface GitRepoRepository extends Repository<GitRepository, UUID> {
 }

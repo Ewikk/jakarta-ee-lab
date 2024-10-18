@@ -4,5 +4,6 @@
     <featureManager>
         <feature>servlet-6.0</feature>
         <feature>jsonb-3.0</feature>
+        <feature>cdi-4.0</feature>
     </featureManager>
 </server>

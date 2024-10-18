@@ -2,18 +2,21 @@ package com.pg.jakartaeelab.gitRepository.repository.memory;
 
 import com.pg.jakartaeelab.datastore.component.DataStore;
 import com.pg.jakartaeelab.gitRepository.entity.GitRepository;
-import com.pg.jakartaeelab.gitRepository.repository.api.GitRepositoryRepository;
+import com.pg.jakartaeelab.gitRepository.repository.api.GitRepoRepository;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Inject;
 
-import javax.xml.crypto.Data;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-public class GitRepositoryMemoryRepository implements GitRepositoryRepository {
+@RequestScoped
+public class GitRepoInMemoryRepository implements GitRepoRepository {
 
     private final DataStore dataStore;
 
-    public GitRepositoryMemoryRepository(DataStore store) {
+    @Inject
+    public GitRepoInMemoryRepository(DataStore store) {
         this.dataStore = store;
     }
 

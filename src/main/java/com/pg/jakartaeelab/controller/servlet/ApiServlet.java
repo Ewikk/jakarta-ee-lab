@@ -6,6 +6,7 @@ import com.pg.jakartaeelab.user.controller.api.UserController;
 import com.pg.jakartaeelab.user.controller.simple.UserSimpleController;
 import com.pg.jakartaeelab.user.dto.PatchUserRequest;
 import com.pg.jakartaeelab.user.dto.PutUserRequest;
+import jakarta.inject.Inject;
 import jakarta.json.bind.Jsonb;
 import jakarta.json.bind.JsonbBuilder;
 import jakarta.servlet.ServletException;
@@ -20,9 +21,7 @@ import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-@WebServlet(urlPatterns = {
-        ApiServlet.Paths.API + "/*"
-})
+@WebServlet(urlPatterns = {ApiServlet.Paths.API + "/*"})
 @MultipartConfig()
 public class ApiServlet extends HttpServlet {
 
@@ -42,6 +41,11 @@ public class ApiServlet extends HttpServlet {
     }
 
     private final Jsonb jsonb = JsonbBuilder.create();
+
+    @Inject
+    public ApiServlet(UserController userController) {
+        this.userController = userController;
+    }
 
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -227,15 +231,9 @@ public class ApiServlet extends HttpServlet {
 
     public static String createUrl(HttpServletRequest request, String... paths) {
         StringBuilder builder = new StringBuilder();
-        builder.append(request.getScheme())
-                .append("://")
-                .append(request.getServerName())
-                .append(":")
-                .append(request.getServerPort())
-                .append(request.getContextPath());
+        builder.append(request.getScheme()).append("://").append(request.getServerName()).append(":").append(request.getServerPort()).append(request.getContextPath());
         for (String path : paths) {
-            builder.append("/")
-                    .append(path, path.startsWith("/") ? 1 : 0, path.endsWith("/") ? path.length() - 1 : path.length());
+            builder.append("/").append(path, path.startsWith("/") ? 1 : 0, path.endsWith("/") ? path.length() - 1 : path.length());
         }
         return builder.toString();
     }

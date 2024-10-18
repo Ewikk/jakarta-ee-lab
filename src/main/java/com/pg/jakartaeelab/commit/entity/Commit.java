@@ -14,7 +14,7 @@ import java.util.UUID;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Commit implements Serializable {
     private UUID id;
-    private String commitId;
+    //private String commitId;
     private LocalDateTime timestamp;
     private String message;
     private int filesChangedCount;

@@ -5,15 +5,19 @@ import com.pg.jakartaeelab.commit.repository.api.CommitRepository;
 import com.pg.jakartaeelab.datastore.component.DataStore;
 import com.pg.jakartaeelab.gitRepository.entity.GitRepository;
 import com.pg.jakartaeelab.user.entity.User;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Inject;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+@RequestScoped
 public class CommitInMemoryRepository implements CommitRepository {
     private final DataStore dataStore;
 
+    @Inject
     public CommitInMemoryRepository(DataStore store) {
         this.dataStore = store;
     }

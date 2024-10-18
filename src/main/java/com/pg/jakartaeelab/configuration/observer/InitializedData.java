@@ -1,7 +1,10 @@
-package com.pg.jakartaeelab.configuration.listener;
+package com.pg.jakartaeelab.configuration.observer;
+
 
 import com.pg.jakartaeelab.user.entity.User;
 import com.pg.jakartaeelab.user.service.UserService;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import jakarta.servlet.ServletContextEvent;
 import jakarta.servlet.ServletContextListener;
 import lombok.SneakyThrows;
@@ -9,14 +12,21 @@ import lombok.SneakyThrows;
 import java.io.InputStream;
 import java.time.LocalDate;
 import java.util.UUID;
-
+@ApplicationScoped
 public class InitializedData implements ServletContextListener {
-    private UserService userService;
+    private final UserService userService;
 
-    @Override
-    public void contextInitialized(ServletContextEvent event) {
-        userService = (UserService) event.getServletContext().getAttribute("userService");
-        init();
+//    @Override
+//    public void contextInitialized(ServletContextEvent event) {
+//        userService = (UserService) event.getServletContext().getAttribute("userService");
+//        init();
+//    }
+
+    @Inject
+    public InitializedData(
+            UserService userService
+    ){
+        this.userService = userService;
     }
 
     @SneakyThrows

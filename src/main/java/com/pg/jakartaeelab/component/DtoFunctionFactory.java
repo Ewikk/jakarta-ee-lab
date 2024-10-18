@@ -4,7 +4,9 @@ import com.pg.jakartaeelab.user.dto.function.RequestToUserFunction;
 import com.pg.jakartaeelab.user.dto.function.UpdateUserWithRequestFunction;
 import com.pg.jakartaeelab.user.dto.function.UserToResponseFunction;
 import com.pg.jakartaeelab.user.dto.function.UsersToResponseFunction;
+import jakarta.enterprise.context.ApplicationScoped;
 
+@ApplicationScoped
 public class DtoFunctionFactory {
     public UserToResponseFunction userToResponse() {
         return new UserToResponseFunction();

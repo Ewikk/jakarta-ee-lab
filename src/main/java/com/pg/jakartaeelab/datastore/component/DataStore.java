@@ -4,6 +4,9 @@ import com.pg.jakartaeelab.commit.entity.Commit;
 import com.pg.jakartaeelab.gitRepository.entity.GitRepository;
 import com.pg.jakartaeelab.serialization.component.CloningUtility;
 import com.pg.jakartaeelab.user.entity.User;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import lombok.NoArgsConstructor;
 import lombok.extern.java.Log;
 
 import java.util.HashSet;
@@ -13,6 +16,8 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Log
+@ApplicationScoped
+@NoArgsConstructor(force = true)
 public class DataStore {
     private final Set<GitRepository> gitRepositories = new HashSet<>();
     private final Set<Commit> commits = new HashSet<>();
@@ -20,6 +25,7 @@ public class DataStore {
 
     private final CloningUtility cloningUtility;
 
+    @Inject
     public DataStore(CloningUtility cloningUtility) {
         this.cloningUtility = cloningUtility;
     }
