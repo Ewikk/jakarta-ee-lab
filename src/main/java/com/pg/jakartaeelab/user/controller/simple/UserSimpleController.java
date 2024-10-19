@@ -11,6 +11,8 @@ import com.pg.jakartaeelab.user.dto.PatchUserRequest;
 import com.pg.jakartaeelab.user.dto.PutUserRequest;
 import com.pg.jakartaeelab.user.entity.User;
 import com.pg.jakartaeelab.user.service.UserService;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Inject;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -21,10 +23,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+@RequestScoped
 public class UserSimpleController implements UserController {
     private final UserService service;
     private final DtoFunctionFactory factory;
 
+    @Inject
     public UserSimpleController(UserService userService, DtoFunctionFactory dtoFunctionFactory) {
         service = userService;
         factory = dtoFunctionFactory;
