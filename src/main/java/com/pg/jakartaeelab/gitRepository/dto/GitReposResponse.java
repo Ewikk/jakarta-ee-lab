@@ -9,7 +9,7 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class GetGitReposResponse {
+public class GitReposResponse {
     @Data
     @Builder
     @NoArgsConstructor

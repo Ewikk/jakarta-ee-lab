@@ -41,6 +41,24 @@ public class DataStore {
         gitRepositories.add(cloningUtility.clone(value));
     }
 
+    public synchronized void updateGitRepo(GitRepository value) throws IllegalArgumentException {
+        GitRepository entity = cloneWithRelationships(value);
+        commits.stream()
+                .filter(commit -> commit.getGitRepository().getId().equals(entity.getId()))
+                .forEach(commit -> commit.setGitRepository(entity));
+        if (gitRepositories.removeIf(repo -> repo.getId().equals(value.getId()))) {
+            gitRepositories.add(entity);
+        } else {
+            throw new IllegalArgumentException("The git repo with id \"%s\" does not exist".formatted(value.getId()));
+        }
+    }
+
+    public synchronized void deleteGitRepo(UUID id) throws IllegalArgumentException {
+        if (!gitRepositories.removeIf(gitRepository -> gitRepository.getId().equals(id))) {
+            throw new IllegalArgumentException("The git repo with id \"%s\" does not exist".formatted(id));
+        }
+    }
+
     public synchronized List<Commit> findAllCommits() {
         return commits.stream().map(cloningUtility::clone).collect(Collectors.toList());
     }
@@ -80,8 +98,8 @@ public class DataStore {
     }
 
     //TO DO: solve relations, cascade deletion?
-    public synchronized  void deleteUser(User value) throws IllegalArgumentException{
-        if(!users.removeIf(user -> user.getId().equals(value.getId()))){
+    public synchronized void deleteUser(User value) throws IllegalArgumentException {
+        if (!users.removeIf(user -> user.getId().equals(value.getId()))) {
             throw new IllegalArgumentException("The user with id \"%s\" does not exist".formatted(value.getId()));
         }
     }
@@ -105,6 +123,20 @@ public class DataStore {
 
         if (entity.getGitRepository() != null) {
             entity.setGitRepository(gitRepositories.stream().filter(profession -> profession.getId().equals(value.getGitRepository().getId())).findFirst().orElseThrow(() -> new IllegalArgumentException("No git repo with id \"%s\".".formatted(value.getGitRepository().getId()))));
+        }
+
+        return entity;
+    }
+
+    private GitRepository cloneWithRelationships(GitRepository value) {
+        GitRepository entity = cloningUtility.clone(value);
+
+        if (entity.getOwner() != null) {
+            entity.setOwner(users.stream().filter(user -> user.getId().equals(value.getOwner().getId())).findFirst().orElseThrow(() -> new IllegalArgumentException("No user with id \"%s\".".formatted(value.getOwner().getId()))));
+        }
+
+        if (entity.getCommits() != null) {
+            entity.setCommits(commits.stream().filter(commit -> commit.getId().equals(value.getId())).toList());
         }
 
         return entity;

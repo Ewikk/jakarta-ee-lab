@@ -78,3 +78,36 @@ Content-Disposition: form-data; name="avatar"; filename="redix2.jpg'
 
 DELETE http://localhost:9080/jakarta-ee-lab/api/users/f08ce4de-c57e-4f6e-a55f-7ce6a15e871d/avatar
 
+###
+
+GET http://localhost:9080/jakarta-ee-lab/api/repos
+
+###
+
+GET http://localhost:9080/jakarta-ee-lab/api/repos/6411cea1-4e09-43c8-ad16-91215022025e
+
+###
+
+PUT http://localhost:9080/jakarta-ee-lab/api/repos/6411cea1-4e09-43c8-ad16-912150220252
+Content-Type: application/json
+
+{
+  "name": "new-test-repo",
+  "creationDate": "2024-10-21",
+  "ownerId": "c195b6a2-5966-4dd0-a790-5b160d34179f",
+  "visibility": "PRIVATE"
+}
+
+###
+
+GET http://localhost:9080/jakarta-ee-lab/api/repos/6411cea1-4e09-43c8-ad16-912150220252
+
+###
+
+PATCH http://localhost:9080/jakarta-ee-lab/api/repos/6411cea1-4e09-43c8-ad16-912150220252
+Content-Type: application/json
+
+{
+  "name": "new-test-repo-renamed",
+  "visibility": "PUBLIC"
+}

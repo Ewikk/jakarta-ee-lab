@@ -1,18 +1,18 @@
 package com.pg.jakartaeelab.gitRepository.dto.function;
 
-import com.pg.jakartaeelab.gitRepository.dto.GetGitReposResponse;
+import com.pg.jakartaeelab.gitRepository.dto.GitReposResponse;
 import com.pg.jakartaeelab.gitRepository.entity.GitRepository;
 
 import java.util.List;
 import java.util.function.Function;
 
-public class GetGitReposResponseFunction implements Function<List<GitRepository>, GetGitReposResponse> {
+public class GitReposToResponseFunction implements Function<List<GitRepository>, GitReposResponse> {
 
     @Override
-    public GetGitReposResponse apply(List<GitRepository> gitRepos) {
-        return GetGitReposResponse.builder()
+    public GitReposResponse apply(List<GitRepository> gitRepos) {
+        return GitReposResponse.builder()
                 .gitRepos(gitRepos.stream()
-                        .map(repo -> GetGitReposResponse.GitRepo.builder()
+                        .map(repo -> GitReposResponse.GitRepo.builder()
                                 .id(repo.getId())
                                 .name(repo.getName())
                                 .build())

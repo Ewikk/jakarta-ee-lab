@@ -37,11 +37,11 @@ public class GitRepoInMemoryRepository implements GitRepoRepository {
 
     @Override
     public void delete(GitRepository entity) {
-        throw new UnsupportedOperationException("Operation not implemented.");
+        dataStore.deleteGitRepo(entity.getId());
     }
 
     @Override
     public void update(GitRepository entity) {
-        throw new UnsupportedOperationException("Operation not implemented.");
+       dataStore.updateGitRepo(entity);
     }
 }

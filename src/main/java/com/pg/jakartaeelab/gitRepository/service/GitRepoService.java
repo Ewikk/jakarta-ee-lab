@@ -32,6 +32,12 @@ public class GitRepoService {
         repository.create(gitRepo);
     }
 
+    public void update(GitRepository gitRepo) {
+        repository.update(gitRepo);
+    }
 
+    public void delete(GitRepository gitRepo) {
+        repository.delete(gitRepo);
+    }
 
 }
