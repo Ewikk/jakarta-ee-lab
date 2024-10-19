@@ -1,6 +1,7 @@
 package com.pg.jakartaeelab.configuration.observer;
 
 
+import com.pg.jakartaeelab.commit.entity.Commit;
 import com.pg.jakartaeelab.commit.service.CommitService;
 import com.pg.jakartaeelab.gitRepository.entity.GitRepository;
 import com.pg.jakartaeelab.gitRepository.entity.RepositoryVisibility;
@@ -19,6 +20,8 @@ import lombok.SneakyThrows;
 
 import java.io.InputStream;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.UUID;
 @ApplicationScoped
 public class InitializedData implements ServletContextListener {
@@ -119,10 +122,53 @@ public class InitializedData implements ServletContextListener {
                 .name("open-ai-blockchain-project")
                 .build();
 
+        Commit commit1 = Commit.builder()
+                .id(UUID.fromString("7411cea1-4e09-43c8-ad16-912150220250"))
+                .author(user1)
+                .timestamp(LocalDateTime.of(2024, 2, 3, 12, 12))
+                .message("code refactor")
+                .filesChangedCount(3)
+                .gitRepository(gitRepo1)
+                .build();
+        Commit commit2 = Commit.builder()
+                .id(UUID.fromString("8411cea1-4e09-43c8-ad16-912150220250"))
+                .author(user2)
+                .timestamp(LocalDateTime.of(2024, 2, 3, 14, 1))
+                .message("gitignore updated")
+                .filesChangedCount(3)
+                .gitRepository(gitRepo1)
+                .build();
+
+        Commit commit3 = Commit.builder()
+                .id(UUID.fromString("9411cea1-4e09-43c8-ad16-912150220250"))
+                .author(user3)
+                .timestamp(LocalDateTime.of(2024, 2, 3, 18, 3))
+                .message("controller null ref fix")
+                .filesChangedCount(3)
+                .gitRepository(gitRepo1)
+                .build();
+
+        Commit commit4 = Commit.builder()
+                .id(UUID.fromString("A411cea1-4e09-43c8-ad16-912150220250"))
+                .author(user2)
+                .timestamp(LocalDateTime.of(2023, 4, 15, 10, 12))
+                .message("repo init")
+                .filesChangedCount(3)
+                .gitRepository(gitRepo2)
+                .build();
+
+        //gitRepo1.setCommits(Arrays.asList(commit1, commit2, commit3));
+        //gitRepo2.setCommits(Arrays.asList(commit4));
+
         repoService.create(gitRepo1);
         repoService.create(gitRepo2);
         repoService.create(gitRepo3);
         repoService.create(gitRepo4);
+
+        commitService.create(commit1);
+        commitService.create(commit2);
+        commitService.create(commit3);
+        commitService.create(commit4);
 
         requestContextController.deactivate();
     }

@@ -111,3 +111,43 @@ Content-Type: application/json
   "name": "new-test-repo-renamed",
   "visibility": "PUBLIC"
 }
+
+###
+
+GET http://localhost:9080/jakarta-ee-lab/api/commits
+
+###
+
+GET http://localhost:9080/jakarta-ee-lab/api/commits/8411cea1-4e09-43c8-ad16-912150220250
+
+###
+
+GET http://localhost:9080/jakarta-ee-lab/api/repos/6411cea1-4e09-43c8-ad16-91215022025d/commits
+
+###
+
+PUT http://localhost:9080/jakarta-ee-lab/api/commits/8411cea1-4e09-43d8-ad16-912150220250
+Content-Type:  application/json
+
+{
+  "timestamp": "2024-10-21T16:30:00",
+  "message": "little fix",
+  "filesChangedCount": 4,
+  "authorId": "c195b6a2-5966-4dd0-a790-5b160d34179f",
+  "repoId": "6411cea1-4e09-43c8-ad16-91215022025d"
+}
+
+###
+
+PATCH http://localhost:9080/jakarta-ee-lab/api/commits/8411cea1-4e09-43d8-ad16-912150220250
+Content-Type: application/json
+
+{
+  "message": "bigger fix",
+  "filesChangedCount": 10,
+  "timestamp": "2024-10-21T18:47:00"
+}
+
+###
+
+DELETE http://localhost:9080/jakarta-ee-lab/api/commits/8411cea1-4e09-43d8-ad16-912150220250

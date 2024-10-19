@@ -1,6 +1,8 @@
 package com.pg.jakartaeelab.controller.servlet;
 
 import com.pg.jakartaeelab.commit.controller.api.CommitController;
+import com.pg.jakartaeelab.commit.dto.PatchCommitRequest;
+import com.pg.jakartaeelab.commit.dto.PutCommitRequest;
 import com.pg.jakartaeelab.controller.servlet.exception.AlreadyExistsException;
 import com.pg.jakartaeelab.controller.servlet.exception.NotFoundException;
 import com.pg.jakartaeelab.gitRepository.contoller.api.GitRepoController;
@@ -128,7 +130,6 @@ public class ApiServlet extends HttpServlet {
                 return;
             } else if (path.matches(Patterns.GIT_REPOS.pattern())) {
                 try {
-                    var test = gitRepoController.getGitRepos();
                     resp.getWriter().write(jsonb.toJson(gitRepoController.getGitRepos()));
                     resp.setContentType("application/json");
                     resp.setStatus(HttpServletResponse.SC_OK);
@@ -145,6 +146,32 @@ public class ApiServlet extends HttpServlet {
                     resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
                 }
 
+            } else if (path.matches(Patterns.COMMITS.pattern())) {
+                try {
+                    resp.getWriter().write(jsonb.toJson(commitController.getCommits()));
+                    resp.setContentType("application/json");
+                    resp.setStatus(HttpServletResponse.SC_OK);
+                } catch (NotFoundException ex) {
+                    resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
+                }
+            } else if (path.matches(Patterns.COMMIT.pattern())) {
+                UUID uuid = extractUuid(Patterns.COMMIT, path);
+                try {
+                    resp.getWriter().write(jsonb.toJson(commitController.getCommit(uuid)));
+                    resp.setContentType("application/json");
+                    resp.setStatus(HttpServletResponse.SC_OK);
+                } catch (NotFoundException ex) {
+                    resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
+                }
+            } else if (path.matches(Patterns.GIT_REPO_COMMITS.pattern())) {
+                UUID uuid = extractUuid(Patterns.GIT_REPO_COMMITS, path);
+                try {
+                    resp.getWriter().write(jsonb.toJson(commitController.getRepoCommits(uuid)));
+                    resp.setContentType("application/json");
+                    resp.setStatus(HttpServletResponse.SC_OK);
+                } catch (NotFoundException ex) {
+                    resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
+                }
             } else {
                 resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             }
@@ -196,6 +223,15 @@ public class ApiServlet extends HttpServlet {
                 } catch (AlreadyExistsException e) {
                     resp.sendError(HttpServletResponse.SC_CONFLICT, e.getMessage());
                 }
+            } else if (path.matches(Patterns.COMMIT.pattern())) {
+                UUID uuid = extractUuid(Patterns.COMMIT, path);
+                try {
+                    commitController.putCommit(uuid, jsonb.fromJson(req.getReader(), PutCommitRequest.class));
+                    resp.addHeader("Location", createUrl(req, Paths.API, "commits", uuid.toString()));
+                    resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
+                } catch (AlreadyExistsException e) {
+                    resp.sendError(HttpServletResponse.SC_CONFLICT, e.getMessage());
+                }
             } else {
                 resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             }
@@ -220,8 +256,7 @@ public class ApiServlet extends HttpServlet {
                     resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
                 }
                 return;
-            }
-            if (path.matches(Patterns.USER_AVATAR.pattern())) {
+            } else if (path.matches(Patterns.USER_AVATAR.pattern())) {
                 UUID uuid = extractUuid(Patterns.USER_AVATAR, path);
                 try {
                     userController.deleteUserAvatar(uuid, avatarPath);
@@ -231,11 +266,18 @@ public class ApiServlet extends HttpServlet {
                 }
                 return;
 
-            }
-            if (path.matches(Patterns.USER.pattern())) {
+            } else if (path.matches(Patterns.USER.pattern())) {
                 UUID uuid = extractUuid(Patterns.GIT_REPO, path);
                 try {
                     gitRepoController.delete(uuid);
+                    resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
+                } catch (NotFoundException e) {
+                    resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
+                }
+            } else if (path.matches(Patterns.COMMIT.pattern())) {
+                UUID uuid = extractUuid(Patterns.COMMIT, path);
+                try {
+                    commitController.deleteCommit(uuid);
                     resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
                 } catch (NotFoundException e) {
                     resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
@@ -265,8 +307,7 @@ public class ApiServlet extends HttpServlet {
                 resp.addHeader("Location", createUrl(req, Paths.API, "users", uuid.toString()));
                 resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
                 return;
-            }
-            if (path.matches(Patterns.USER_AVATAR.pattern())) {
+            } else if (path.matches(Patterns.USER_AVATAR.pattern())) {
                 resp.setContentType("image/png");
                 UUID uuid = extractUuid(Patterns.USER_AVATAR, path);
                 try {
@@ -282,8 +323,7 @@ public class ApiServlet extends HttpServlet {
                 }
                 return;
 
-            }
-            if (path.matches(Patterns.GIT_REPO.pattern())) {
+            } else if (path.matches(Patterns.GIT_REPO.pattern())) {
                 UUID uuid = extractUuid(Patterns.GIT_REPO, path);
                 try {
                     gitRepoController.patchGitRepo(uuid, jsonb.fromJson(req.getReader(), PatchGitRepoRequest.class));
@@ -292,6 +332,17 @@ public class ApiServlet extends HttpServlet {
                     return;
                 }
                 resp.addHeader("Location", createUrl(req, Paths.API, "repos", uuid.toString()));
+                resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
+                return;
+            } else if (path.matches(Patterns.COMMIT.pattern())) {
+                UUID uuid = extractUuid(Patterns.COMMIT, path);
+                try {
+                    commitController.patchCommit(uuid, jsonb.fromJson(req.getReader(), PatchCommitRequest.class));
+                } catch (NotFoundException ex) {
+                    resp.sendError(HttpServletResponse.SC_NOT_FOUND, ex.getMessage());
+                    return;
+                }
+                resp.addHeader("Location", createUrl(req, Paths.API, "commits", uuid.toString()));
                 resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
                 return;
             } else {

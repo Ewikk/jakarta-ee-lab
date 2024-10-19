@@ -7,6 +7,7 @@ import com.pg.jakartaeelab.commit.dto.PatchCommitRequest;
 import com.pg.jakartaeelab.commit.dto.PutCommitRequest;
 import com.pg.jakartaeelab.commit.service.CommitService;
 import com.pg.jakartaeelab.component.DtoFunctionFactory;
+import com.pg.jakartaeelab.controller.servlet.exception.AlreadyExistsException;
 import com.pg.jakartaeelab.controller.servlet.exception.BadRequestException;
 import com.pg.jakartaeelab.controller.servlet.exception.NotFoundException;
 import jakarta.enterprise.context.RequestScoped;
@@ -48,6 +49,9 @@ public class CommitSimpleController implements CommitController {
     @Override
     public void putCommit(UUID id, PutCommitRequest request) {
         try {
+            service.find(id).ifPresent(commit -> {
+                throw new AlreadyExistsException();
+            });
             service.create(factory.requestToCommit().apply(id, request));
         } catch (IllegalArgumentException ex) {
             throw new BadRequestException(ex);

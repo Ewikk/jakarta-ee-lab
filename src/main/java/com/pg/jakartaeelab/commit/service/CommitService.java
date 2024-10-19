@@ -58,9 +58,11 @@ public class CommitService {
 
     public Optional<List<Commit>> findAllByRepo(UUID uuid) {
         return gitRepoRepository.find(uuid).map(commitRepository::findAllByGitRepository);
-    }
+//      return Optional.of(commitRepository.findAll().stream().filter(commit -> commit.getGitRepository().getId().equals(uuid)).toList());
 
-    public Optional<List<Commit>> findAllByUser(UUID uuid){
+}
+
+    public Optional<List<Commit>> findAllByUser(UUID uuid) {
         return userRepository.find(uuid).map(commitRepository::findAllByUser);
     }
 }
