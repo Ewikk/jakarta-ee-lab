@@ -24,6 +24,3 @@ public class GitRepository implements Serializable {
 
 }
 
-enum RepositoryVisibility{
-    PUBLIC, PRIVATE
-}
