@@ -25,7 +25,7 @@ import java.util.regex.Pattern;
 @MultipartConfig()
 public class ApiServlet extends HttpServlet {
 
-    private UserController userController;
+    private final UserController userController;
 
     private String avatarPath;
 
@@ -60,9 +60,7 @@ public class ApiServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         super.init();
-        userController = (UserSimpleController) getServletContext().getAttribute("userController");
         avatarPath = (String) getServletContext().getInitParameter("avatars-path");
-        System.out.println("INIT");
     }
 
     @Override
