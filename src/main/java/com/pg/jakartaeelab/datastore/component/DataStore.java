@@ -9,10 +9,7 @@ import jakarta.inject.Inject;
 import lombok.NoArgsConstructor;
 import lombok.extern.java.Log;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Log
@@ -121,8 +118,29 @@ public class DataStore {
             entity.setAuthor(users.stream().filter(user -> user.getId().equals(value.getAuthor().getId())).findFirst().orElseThrow(() -> new IllegalArgumentException("No user with id \"%s\".".formatted(value.getAuthor().getId()))));
         }
 
+//        if (entity.getGitRepository() != null) {
+//            entity.setGitRepository(gitRepositories.stream().filter(profession -> profession.getId().equals(value.getGitRepository().getId())).findFirst().orElseThrow(() -> new IllegalArgumentException("No git repo with id \"%s\".".formatted(value.getGitRepository().getId()))));
+//            if(entity.getGitRepository().getCommits() == null){
+//                entity.getGitRepository().setCommits(new LinkedList<Commit>());
+//            }else{
+//                entity.getGitRepository().setCommits(value.getGitRepository().getCommits());
+//            }
+//            entity.getGitRepository().getCommits().add(entity);
+//        }
+
         if (entity.getGitRepository() != null) {
-            entity.setGitRepository(gitRepositories.stream().filter(profession -> profession.getId().equals(value.getGitRepository().getId())).findFirst().orElseThrow(() -> new IllegalArgumentException("No git repo with id \"%s\".".formatted(value.getGitRepository().getId()))));
+            GitRepository repo = gitRepositories.stream()
+                    .filter(g -> g.getId().equals(value.getGitRepository().getId()))
+                    .findFirst()
+                    .orElseThrow(() -> new IllegalArgumentException("The git repository with id \"%s\" does not exist.".formatted(value.getGitRepository().getId())));
+
+            entity.setGitRepository(repo);
+
+            if (repo.getCommits() == null) {
+                repo.setCommits(new ArrayList<Commit>());
+            }
+            repo.getCommits().add(entity);
+
         }
 
         return entity;
@@ -135,7 +153,11 @@ public class DataStore {
             entity.setOwner(users.stream().filter(user -> user.getId().equals(value.getOwner().getId())).findFirst().orElseThrow(() -> new IllegalArgumentException("No user with id \"%s\".".formatted(value.getOwner().getId()))));
         }
 
-        if (entity.getCommits() != null) {
+        if(null == entity.getCommits()){
+            entity.setCommits(new LinkedList<>());
+        }
+
+        if (value.getCommits() != null) {
             entity.setCommits(commits.stream().filter(commit -> commit.getId().equals(value.getId())).toList());
         }
 

@@ -19,6 +19,8 @@ public class GitRepository implements Serializable {
     private String name;
     private LocalDate creationDate;
     private RepositoryVisibility visibility;
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     private List<Commit> commits;
     private User owner;
 

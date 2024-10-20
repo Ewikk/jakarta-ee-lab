@@ -5,6 +5,8 @@ import com.pg.jakartaeelab.gitRepository.dto.GitRepoResponse;
 import com.pg.jakartaeelab.gitRepository.entity.GitRepository;
 import com.pg.jakartaeelab.user.dto.GetUsersResponse;
 
+import java.util.LinkedList;
+import java.util.Optional;
 import java.util.function.Function;
 
 public class GitRepoToResponseFunction implements Function<GitRepository, GitRepoResponse> {
@@ -17,12 +19,14 @@ public class GitRepoToResponseFunction implements Function<GitRepository, GitRep
                         .id(gitRepo.getOwner().getId())
                         .login(gitRepo.getOwner().getLogin())
                         .build())
-//                .commits(gitRepo.getCommits().stream()
-//                        .map(commit -> GetCommitsResponse.Commit.builder()
-//                                .message(commit.getMessage())
-//                                .id(commit.getId())
-//                                .build())
-//                        .toList())
+                .commits(Optional.ofNullable(gitRepo.getCommits())
+                        .orElse(new LinkedList<>())
+                        .stream()
+                        .map(commit -> GetCommitsResponse.Commit.builder()
+                                .message(commit.getMessage())
+                                .id(commit.getId())
+                                .build())
+                        .toList())
                 .creationDate(gitRepo.getCreationDate())
                 .visibility(gitRepo.getVisibility())
                 .build();
